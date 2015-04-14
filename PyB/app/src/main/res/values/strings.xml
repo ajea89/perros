@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Perros y Burros</string>
+    <string name="login">Login</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="title_activity_login_recover_password">LoginRecoverPassword</string>
+
+    <!--login-->
+    <string name="invalidInfoToast">Usuario y/o contraseña invalidos</string>
+    <string name="incompleteInfoToast">Debes llenar todos los campos</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="enter">Entrar</string>
+    <string name="enterAccount">Entrar a mi cuenta  ></string>
+    <string name="enterWithoutAccount">Entrar sin cuenta  ></string>
+    <string name="missedPass">¿Olvidaste tu contraseña?</string>
+
+    <!--loginRecover-->
+    <string name="incompleteMail">Debes introducir correo</string>
+    <string name="invaidMail">Introduce correo valido</string>
+    <string name="askMail">Introduzca su dirección de correo electrónico.</string>
+    <string name="mail">Correo</string>
+    <string name="send">ENVIAR</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="nav_titles">
+        <item>Inicio</item>
+        <item>Nosotros</item>
+        <item>Galería</item>
+        <item>Menu</item>
+        <item>Eventos</item>
+        <item>Sucursales</item>
+        <item>Salir</item>
+    </string-array>
+
+
+</resources>
