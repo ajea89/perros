@@ -28,14 +28,14 @@ public class DbPyB extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         productQuery = "CREATE TABLE IF NOT EXISTS product (id_product TEXT PRIMARY KEY, product_name TEXT, product_description TEXT, product_price TEXT, product_type TEXT)";
         clientQuery = "CREATE TABLE IF NOT EXISTS client (id_client TEXT PRIMARY KEY, client_name TEXT, client_address TEXT, client_phone TEXT, client_mail TEXT)";
-        orderQuery = "CREATE TABLE IF NOT EXISTS order (id_order TEXT PRIMARY KEY, product_id TEXT, client_id TEXT)";
+        orderQuery = "CREATE TABLE IF NOT EXISTS orden (id_order TEXT PRIMARY KEY, product_id TEXT, client_id TEXT)";
         productTypeQuery = "CREATE TABLE IF NOT EXISTS product_type (id_type TEXT PRIMARY KEY, type_name TEXT)";
 
         try {
             db.execSQL(productQuery);
             db.execSQL(clientQuery);
-            db.execSQL(orderQuery);
             db.execSQL(productTypeQuery);
+            db.execSQL(orderQuery);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class DbPyB extends SQLiteOpenHelper{
     public boolean insertUpdateProduct(Product product){
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT OR REPLACE INTO product VALUES('"+product.getId()+"','"+product.getName()+"','"+product.getDescription()+"','"+product.getPrice()+"')";
+        String query = "INSERT OR REPLACE INTO product VALUES('"+product.getId()+"','"+product.getName()+"','"+product.getDescription()+"','"+product.getPrice()+"','"+product.getProductType()+"')";
 
         if (db != null){
             try {
