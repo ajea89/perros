@@ -5,8 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.pyb.Beans.DbPyB;
-import com.example.pyb.Beans.FillDataBase;
+import com.example.pyb.DataBase.DbPyB;
+import com.example.pyb.DataBase.FillDataBase;
 import com.example.pyb.Beans.Product;
 import com.example.pyb.R;
 
@@ -30,26 +30,7 @@ public class Splash extends Activity {
 
         ArrayList<Product> products = db.readProducts(0,5);
         if (products == null){
-            FillDataBase fillDataBase = new FillDataBase(this){
-                @Override
-                protected void onPreExecute() {
-                    super.onPreExecute();
-                    pd = new ProgressDialog(Splash.this);
-                    pd.setIndeterminate(true);
-                    pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    pd.setCancelable(false);
-                    pd.setMessage("Configurando...");
-                    pd.show();
-                }
-
-                @Override
-                protected void onPostExecute(Object o) {
-                    super.onPostExecute(o);
-                    if (pd != null){
-                        pd.dismiss();
-                    }
-                }
-            };
+            FillDataBase fillDataBase = new FillDataBase(this);
             fillDataBase.execute();
         }
 
@@ -74,7 +55,5 @@ public class Splash extends Activity {
         if (timer != null)
             timer.cancel();
     }
-
-
 
 }

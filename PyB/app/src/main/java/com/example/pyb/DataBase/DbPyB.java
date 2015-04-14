@@ -1,9 +1,14 @@
-package com.example.pyb.Beans;
+package com.example.pyb.DataBase;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.pyb.Beans.Client;
+import com.example.pyb.Beans.Order;
+import com.example.pyb.Beans.Product;
+import com.example.pyb.Beans.ProductType;
 
 import java.util.ArrayList;
 
@@ -275,14 +280,33 @@ public class DbPyB extends SQLiteOpenHelper{
         return clients;
     }
 
-    public ArrayList<ProductType> readProductTypes(int productTypeId){
+    public ArrayList<ProductType> readProductTypes(int productTypeId, boolean allProductTypes){
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<ProductType> productTypes = null;
 
-        if (productTypeId>0){
+        if (productTypeId>0 && allProductTypes == false){
             query = "SELECT * FROM product_type WHERE id_type LIKE '"+productTypeId+"'";
+            if (db != null){
+                Cursor cursor = db.rawQuery(query,null);
+
+                if (cursor.moveToFirst()){
+                    productTypes = new ArrayList<>();
+
+                    do {
+                        ProductType productType = new ProductType();
+
+                        productType.setId(Integer.parseInt(cursor.getString(0)));
+                        productType.setName(cursor.getString(1));
+
+                        productTypes.add(productType);
+
+                    }while ((cursor.moveToNext()));
+                }
+            }
+        }else if (allProductTypes == true){
+            query = "SELECT * FROM product_type";
             if (db != null){
                 Cursor cursor = db.rawQuery(query,null);
 

@@ -1,7 +1,10 @@
-package com.example.pyb.Beans;
+package com.example.pyb.DataBase;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.pyb.Beans.Product;
+import com.example.pyb.Beans.ProductType;
 
 /**
  * Created by alan on 13/04/15.

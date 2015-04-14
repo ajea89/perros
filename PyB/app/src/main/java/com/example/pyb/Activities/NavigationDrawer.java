@@ -57,6 +57,8 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
             }
+
+
         };
 
         drawerLayout.setDrawerListener(drawerToggle);
