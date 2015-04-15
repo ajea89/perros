@@ -27,6 +27,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <string name="$">$ </string>
     <string-array name="nav_titles">
         <item>Inicio</item>
         <item>Nosotros</item>
@@ -37,8 +38,5 @@
         <item>Salir</item>
     </string-array>
 
-    <string-array name="product_type_titles">
-        <item></item>
-    </string-array>
 
 </resources>

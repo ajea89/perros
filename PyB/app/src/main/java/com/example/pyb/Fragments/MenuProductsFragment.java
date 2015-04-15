@@ -11,6 +11,7 @@ import com.example.pyb.Adapters.MenuProductAdapter;
 import com.example.pyb.Beans.Product;
 import com.example.pyb.DataBase.DbPyB;
 import com.example.pyb.R;
+import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 import java.util.List;
@@ -20,8 +21,15 @@ import java.util.List;
  */
 public class MenuProductsFragment extends BaseFragment {
 
-    public static MenuProductsFragment newInstance(){
+    private static String KEY_ARG = "productType";
+
+    public static MenuProductsFragment newInstance(int productType){
+
         MenuProductsFragment menuProductsFragment = new MenuProductsFragment();
+        Bundle args = new Bundle();
+        args.putInt(KEY_ARG,productType);
+        menuProductsFragment.setArguments(args);
+
         return menuProductsFragment;
     }
 
@@ -36,21 +44,16 @@ public class MenuProductsFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        productType = getArguments().getInt(KEY_ARG);
+
         DbPyB db = new DbPyB(getActivity());
-        GridView gridView = (GridView) findViewById(R.id.grid_list_products);
+        ListView listView = (ListView) findViewById(R.id.list_products);
         List<Product> products = db.readProducts(0,productType+1);
 
         MenuProductAdapter adapter = new MenuProductAdapter(getActivity(),products);
-        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
-        animationAdapter.setAbsListView(gridView);
-        gridView.setAdapter(animationAdapter);
+        AlphaInAnimationAdapter animationAdapter = new AlphaInAnimationAdapter(adapter);
+        animationAdapter.setAbsListView(listView);
+        listView.setAdapter(animationAdapter);
     }
 
-    public int getProductType() {
-        return productType;
-    }
-
-    public void setProductType(int productType) {
-        this.productType = productType;
-    }
 }

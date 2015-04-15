@@ -42,16 +42,14 @@ public class MenuFragment extends BaseFragment {
         List<ProductType> productTypes = db.readProductTypes(0, true);
 
         MenuTypeProductAdapter adapter = new MenuTypeProductAdapter(getActivity(),productTypes);
-//        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
-//        animationAdapter.setAbsListView(listMenu);
-        listMenu.setAdapter(adapter);
+        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
+        animationAdapter.setAbsListView(listMenu);
+        listMenu.setAdapter(animationAdapter);
 
         listMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MenuProductsFragment fragment= new MenuProductsFragment();
-                fragment.setProductType(position);
-
+                MenuProductsFragment fragment = MenuProductsFragment.newInstance(position);
                 addFragmentToBackStack(fragment, "productType");
             }
         });

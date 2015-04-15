@@ -3,12 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridView
-        android:id="@+id/grid_list_products"
-        android:choiceMode="multipleChoice"
-        android:columnWidth="5dp"
-        android:numColumns="2"
+    <ListView
+        android:id="@+id/list_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </GridView>
+    </ListView>
 </RelativeLayout>

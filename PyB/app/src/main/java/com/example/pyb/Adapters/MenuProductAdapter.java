@@ -61,7 +61,13 @@ public class MenuProductAdapter extends BaseAdapter {
         Product product = products.get(position);
 
         holder.tvProductName.setText(product.getName());
-        holder.tvProductDescription.setText(product.getDescription());
+        if (product.getDescription().equals(null) || product.getDescription().equals("null"))
+            holder.tvProductDescription.setVisibility(View.GONE);
+        else{
+            holder.tvProductDescription.setVisibility(View.VISIBLE);
+            holder.tvProductDescription.setText(product.getDescription());
+        }
+
         holder.tvProductPrice.setText(String.valueOf(product.getPrice()));
 
         return convertView;
