@@ -48,7 +48,6 @@ public class MenuProductAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.menu_product_item_list, parent, false);
 
             holder = new ViewHolder();
-
             holder.tvProductName = (TextView) convertView.findViewById(R.id.tv_product_name);
             holder.tvProductDescription = (TextView) convertView.findViewById(R.id.tv_product_description);
             holder.tvProductPrice = (TextView) convertView.findViewById(R.id.tv_product_price);
