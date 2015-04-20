@@ -4,13 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/ly_map"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </LinearLayout>
+    </com.google.android.gms.maps.MapView>
 
     <ListView
         android:id="@+id/list_places"
