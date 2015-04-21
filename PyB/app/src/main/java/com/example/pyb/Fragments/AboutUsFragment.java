@@ -34,9 +34,9 @@ public class AboutUsFragment extends BaseFragment {
         ViewPager vpContent = (ViewPager) findViewById(R.id.vp_content);
         final TabPageIndicator tabs = (TabPageIndicator) findViewById(R.id.tabs);
 
-        adapter.addFragment(CatalogNewFragment.newIntance(), "MISIÓN");
-        adapter.addFragment(CatalogAllFragment.newIntance(), "VISIÓN");
-        adapter.addFragment(CatalogPopularFragment.newIntance(), "VALORES");
+        adapter.addFragment(MisionFragment.newIntance(), "MISIÓN");
+        adapter.addFragment(VisionFragment.newIntance(), "VISIÓN");
+        adapter.addFragment(ValoresFragment.newIntance(), "VALORES");
 
         vpContent.setAdapter(adapter);
         tabs.setViewPager(vpContent);

@@ -39,6 +39,7 @@ public class PlacesFragment extends BaseFragment{
 
     GoogleMap googleMap;
     MapView mapView;
+    boolean firstTime = true;
     private static LocationManager _locationManager;
     private Location _userLocation;
 
@@ -61,7 +62,25 @@ public class PlacesFragment extends BaseFragment{
 
         //setUserLocation();
 
-        //locacion actual
+//        googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+//            @Override
+//            public void onMyLocationChange(Location location) {
+//                if (firstTime = true){
+//                    //locacion actual
+//                    LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//                    Location actLocation = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//
+//                    if (location != null){
+//                        LatLng userLocation = new LatLng(actLocation.getLatitude(),actLocation.getLongitude());
+//                        CameraUpdate actualLocation = CameraUpdateFactory.newLatLngZoom(userLocation,16);
+//                        googleMap.animateCamera(actualLocation);
+//                    }
+//
+//                    firstTime = false;
+//                }
+//            }
+//        });
+//        //locacion actual
         LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 

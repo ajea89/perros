@@ -26,6 +26,12 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="menu_lock">Lock</string>
+    <string name="menu_unlock">Unlock</string>
+    <string name="mision">Somos un restaurante-bar único y reconocido por nuestros deliciosos burritos y hot dogs, elaborados con nuestros diferentes ingredientes. \n \nBrindamos experiencias únicas en un ambiente divertido y sano.</string>
+    <string name="vision">Hacer de perros y burros una empresa líder en el servicio de alimentos y bebidas así como diversión, teniendo como sello característico el diseño de su ambiente, eventos únicos siendo siempre una empresa socialmente responsable.</string>
+    <string name="valores">Responsabilidad \n\n\nRespeto \n\n\nIgualdad
+</string>
 
     <string name="$">$ </string>
     <string-array name="nav_titles">

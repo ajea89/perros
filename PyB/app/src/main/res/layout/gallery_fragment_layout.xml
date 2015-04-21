@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.pyb.Adapters.HackyViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_pager"
+    android:background="@android:color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:textColor="@android:color/holo_green_dark"
-        android:text="Galeria"
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+</com.example.pyb.Adapters.HackyViewPager>
