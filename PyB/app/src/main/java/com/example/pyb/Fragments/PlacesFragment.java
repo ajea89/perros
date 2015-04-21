@@ -1,13 +1,10 @@
 package com.example.pyb.Fragments;
 
 import android.content.Context;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +15,13 @@ import android.widget.Toast;
 import com.example.pyb.Adapters.PlaceAdapter;
 import com.example.pyb.Beans.Place;
 import com.example.pyb.R;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.nhaarman.listviewanimations.appearance.simple.AlphaInAnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 import java.util.ArrayList;
@@ -65,30 +59,17 @@ public class PlacesFragment extends BaseFragment{
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.setMyLocationEnabled(true);
 
-        if (_userLocation == null) {
-            LocationManager lm = (LocationManager) this.getActivity()
-                    .getSystemService(Context.LOCATION_SERVICE);
-            Location lastKnownLoc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //setUserLocation();
 
-            if (lastKnownLoc != null) {
-                _userLocation = lastKnownLoc;
-            } else {
-                _userLocation = new Location(LocationManager.GPS_PROVIDER);
-            }
-
-
-        }
-
-      //  setUserLocation();
-//        LatLng posicion = new LatLng(_userLocation.getLatitude(), _userLocation.getLongitude());
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(posicion, 13));
         //locacion actual
-//        LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-//        Location location = service.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//        LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
-//        CameraUpdate actualLocation = CameraUpdateFactory.newLatLngZoom(userLocation,16);
-//        googleMap.animateCamera(actualLocation);
+        LocationManager service = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Location location = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
+        if (location != null){
+            LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+            CameraUpdate actualLocation = CameraUpdateFactory.newLatLngZoom(userLocation,16);
+            googleMap.animateCamera(actualLocation);
+        }
 
         ListView listView = (ListView) findViewById(R.id.list_places);
         final List<Place> places = fillPlaces();
@@ -103,13 +84,12 @@ public class PlacesFragment extends BaseFragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 Place placeSelected = places.get(position);
-                if(placeSelected.getLatitud() != 0 && placeSelected.getLongitud() != 0){
 
+                if(placeSelected.getLatitud() != 0 && placeSelected.getLongitud() != 0){
                     LatLng coordinate = new LatLng(placeSelected.getLatitud(), placeSelected.getLongitud());
-                    googleMap.addMarker(new MarkerOptions().position(coordinate));
                     CameraUpdate location = CameraUpdateFactory.newLatLngZoom(coordinate,16);
+                    googleMap.addMarker(new MarkerOptions().position(coordinate).title("Perros y Burros "+ placeSelected.getName()));
                     googleMap.animateCamera(location);
-                    googleMap.addMarker(new MarkerOptions().position(coordinate).title(placeSelected.getName()).snippet("Consider yourself located"));
                 }
             }
         });
