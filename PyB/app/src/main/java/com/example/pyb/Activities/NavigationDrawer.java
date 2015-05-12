@@ -19,12 +19,13 @@ import android.widget.ListView;
 import com.example.pyb.Adapters.NavigationDrawerItemAdapter;
 import com.example.pyb.Beans.NavigationDrawerItem;
 import com.example.pyb.Fragments.AboutUsFragment;
+import com.example.pyb.Fragments.CarFragment;
 import com.example.pyb.Fragments.EventFragment;
 import com.example.pyb.Fragments.GalleryFragment;
-import com.example.pyb.Fragments.HomeFragment;
 import com.example.pyb.Fragments.MenuFragment;
 import com.example.pyb.Fragments.PlacesFragment;
 import com.example.pyb.R;
+import com.example.pyb.Utils.Constans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,7 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
         drawerItems.add(new NavigationDrawerItem(navTitles[4], 0));
         drawerItems.add(new NavigationDrawerItem(navTitles[5], 0));
         drawerItems.add(new NavigationDrawerItem(navTitles[6], 0));
+        drawerItems.add(new NavigationDrawerItem(navTitles[7], 0));
 
         NavigationDrawerItemAdapter adapter = new NavigationDrawerItemAdapter(this, LayoutInflater.from(this),drawerItems);
         leftList.setAdapter(adapter);
@@ -101,7 +103,7 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
             switch (section){
 
                 case 0:
-                    fragment = HomeFragment.newInstance();
+                    fragment = EventFragment.newInstance(Constans.HOME_FRAGMENT);
                     break;
                 case 1:
                     fragment = AboutUsFragment.newInstance();
@@ -113,12 +115,15 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
                     fragment = MenuFragment.newInstance();
                     break;
                 case 4:
-                    fragment = EventFragment.newInstance();
+                    fragment = EventFragment.newInstance(Constans.EVENT_FRAGMENT);
                     break;
                 case 5:
                     fragment = PlacesFragment.newInstance();
                     break;
                 case 6:
+                    fragment = CarFragment.newInstance();
+                    break;
+                case 7:
                     finish();
                     break;
             }

@@ -41,6 +41,7 @@
         <item>Menu</item>
         <item>Eventos</item>
         <item>Sucursales</item>
+        <item>Pedido</item>
         <item>Salir</item>
     </string-array>
 

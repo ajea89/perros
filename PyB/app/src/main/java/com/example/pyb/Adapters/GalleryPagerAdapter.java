@@ -13,7 +13,7 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class GalleryPagerAdapter extends PagerAdapter {
 
-    private int[] images = {R.drawable.cerveza_sabor, R.drawable.cerveza, R.drawable.bebidas};
+    private int[] images = {R.drawable.galeria, R.drawable.galeria1, R.drawable.galeria2, R.drawable.galeria3};
 
     @Override
     public int getCount() {

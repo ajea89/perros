@@ -4,23 +4,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.pyb.R;
 
 /**
  * Created by alan on 13/04/15.
  */
-public class HomeFragment extends BaseFragment {
+public class CarFragment extends BaseFragment {
 
-    public static HomeFragment newInstance(){
-        HomeFragment homeFragment = new HomeFragment();
-        return homeFragment;
+    public static CarFragment newInstance(){
+        CarFragment carFragment = new CarFragment();
+        return carFragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.home_fragment_layout, container, false);
+        return inflater.inflate(R.layout.car_fragment_layout, container, false);
     }
 
     @Override
