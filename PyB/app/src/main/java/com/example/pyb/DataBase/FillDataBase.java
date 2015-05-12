@@ -3,6 +3,7 @@ package com.example.pyb.DataBase;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.pyb.Beans.Client;
 import com.example.pyb.Beans.Product;
 import com.example.pyb.Beans.ProductType;
 
@@ -21,6 +22,15 @@ public class FillDataBase extends AsyncTask {
     protected Object doInBackground(Object[] params) {
 
         DbPyB db = new DbPyB(context);
+
+        //onsertar Usuario default
+        Client client = new Client();
+        client.setId("Cliente");
+        client.setAddress("Dir. Cliente default");
+        client.setMail("cliente@gmail.com");
+        client.setName("password");
+        client.setNumberPhone("5526993915");
+        db.insertUpdateClient(client);
 
         //Insertar Tipos de productos
         ProductType productType = new ProductType();

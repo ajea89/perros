@@ -34,6 +34,7 @@
                     android:layout_height="180dp"/>
 
                 <EditText
+                    android:text="Cliente"
                     android:id="@+id/et_login_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,6 +53,7 @@
                     android:textColorHint="@android:color/white"/>
 
                 <EditText
+                    android:text="password"
                     android:id="@+id/et_login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

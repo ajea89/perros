@@ -8,12 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pyb.Beans.Client;
+import com.example.pyb.DataBase.DbPyB;
 import com.example.pyb.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by alan on 6/04/15.
  */
 public class Login extends Activity {
+
+    DbPyB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,20 @@ public class Login extends Activity {
                 String user = etLoginUser.getText().toString();
                 String password = etLoginPassword.getText().toString();
 
-                Intent intent = new Intent(Login.this, NavigationDrawer.class);
-                startActivity(intent);
+                if(user.length() > 0 && password.length() > 0){
 
+                    db = new DbPyB(Login.this);
+                    ArrayList<Client> clients = db.readClientLogin(user,password);
+
+                    if (clients != null){
+                        Intent intent = new Intent(Login.this, NavigationDrawer.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(Login.this,"Usuario y/o Contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(Login.this,"Ingrese todos los datos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

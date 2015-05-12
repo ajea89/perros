@@ -5,17 +5,17 @@ package com.example.pyb.Beans;
  */
 public class Client {
 
-    private int id;
+    private String id;
     private String name;
     private String address;
     private String numberPhone;
     private String mail;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

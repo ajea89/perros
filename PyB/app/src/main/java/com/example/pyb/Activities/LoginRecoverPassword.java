@@ -7,8 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pyb.Beans.Client;
+import com.example.pyb.DataBase.DbPyB;
 import com.example.pyb.R;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +20,7 @@ import java.util.regex.Pattern;
  */
 public class LoginRecoverPassword extends Activity {
 
+    DbPyB db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,15 @@ public class LoginRecoverPassword extends Activity {
                 if (mail.length() > 0){
 
                     if (isEmailValid(mail)){
-                        Toast.makeText(LoginRecoverPassword.this, mail, Toast.LENGTH_SHORT).show();
+                        db = new DbPyB(LoginRecoverPassword.this);
+                        ArrayList<Client> clients = db.readClientEmail(mail);
+
+                        if (clients != null){
+                            Toast.makeText(LoginRecoverPassword.this, "Usuario: "+clients.get(0).getId()+"\nContraseña: "+clients.get(0).getName(), Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(LoginRecoverPassword.this, "Correo no registrado", Toast.LENGTH_SHORT).show();
+                        }
+
                     }else {
                         Toast.makeText(LoginRecoverPassword.this, R.string.invaidMail, Toast.LENGTH_SHORT).show();
                     }

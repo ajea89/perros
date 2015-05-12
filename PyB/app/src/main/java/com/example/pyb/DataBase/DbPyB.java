@@ -245,13 +245,13 @@ public class DbPyB extends SQLiteOpenHelper{
         return products;
     }
 
-    public ArrayList<Client> readClients(int clientId){
+    public ArrayList<Client> readClient(String clientId){
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<Client> clients = null;
 
-        if (clientId>0){
+        if (clientId != null && clientId.length() > 0){
             query = "SELECT * FROM client WHERE id_client LIKE '"+clientId+"'";
             if (db != null){
                 Cursor cursor = db.rawQuery(query,null);
@@ -262,7 +262,77 @@ public class DbPyB extends SQLiteOpenHelper{
                     do {
                         Client client = new Client();
 
-                        client.setId(Integer.parseInt(cursor.getString(0)));
+                        client.setId(cursor.getString(0));
+                        client.setName(cursor.getString(1));
+                        client.setAddress(cursor.getString(2));
+                        client.setNumberPhone(cursor.getString(3));
+                        client.setMail(cursor.getString(4));
+
+                        clients.add(client);
+
+                    }while ((cursor.moveToNext()));
+                }
+            }
+        }
+
+        db.close();
+
+        return clients;
+    }
+
+    public ArrayList<Client> readClientEmail(String email){
+
+        SQLiteDatabase db = getReadableDatabase();
+        String query;
+        ArrayList<Client> clients = null;
+
+        if (email != null && email.length() > 0){
+            query = "SELECT * FROM client WHERE client_mail LIKE '"+email+"'";
+            if (db != null){
+                Cursor cursor = db.rawQuery(query,null);
+
+                if (cursor.moveToFirst()){
+                    clients = new ArrayList<>();
+
+                    do {
+                        Client client = new Client();
+
+                        client.setId(cursor.getString(0));
+                        client.setName(cursor.getString(1));
+                        client.setAddress(cursor.getString(2));
+                        client.setNumberPhone(cursor.getString(3));
+                        client.setMail(cursor.getString(4));
+
+                        clients.add(client);
+
+                    }while ((cursor.moveToNext()));
+                }
+            }
+        }
+
+        db.close();
+
+        return clients;
+    }
+
+    public ArrayList<Client> readClientLogin(String clientId, String pass){
+
+        SQLiteDatabase db = getReadableDatabase();
+        String query;
+        ArrayList<Client> clients = null;
+
+        if (clientId != null && clientId.length() > 0){
+            query = "SELECT * FROM client WHERE id_client LIKE '"+clientId+"' AND client_name LIKE '"+pass+"'";
+            if (db != null){
+                Cursor cursor = db.rawQuery(query,null);
+
+                if (cursor.moveToFirst()){
+                    clients = new ArrayList<>();
+
+                    do {
+                        Client client = new Client();
+
+                        client.setId(cursor.getString(0));
                         client.setName(cursor.getString(1));
                         client.setAddress(cursor.getString(2));
                         client.setNumberPhone(cursor.getString(3));
