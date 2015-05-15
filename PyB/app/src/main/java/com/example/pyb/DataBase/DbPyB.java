@@ -15,13 +15,13 @@ import java.util.ArrayList;
 /**
  * Created by alan on 10/04/15.
  */
-public class DbPyB extends SQLiteOpenHelper{
+public class DbPyB extends SQLiteOpenHelper {
 
     private Context context;
-    private String productQuery= "";
-    private String clientQuery= "";
-    private String orderQuery= "";
-    private String productTypeQuery= "";
+    private String productQuery = "";
+    private String clientQuery = "";
+    private String orderQuery = "";
+    private String productTypeQuery = "";
     private static String databaseName = "dbpyb";
 
 
@@ -33,7 +33,7 @@ public class DbPyB extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         productQuery = "CREATE TABLE IF NOT EXISTS product (id_product TEXT PRIMARY KEY, product_name TEXT, product_description TEXT, product_price TEXT, product_type TEXT)";
         clientQuery = "CREATE TABLE IF NOT EXISTS client (id_client TEXT PRIMARY KEY, client_name TEXT, client_address TEXT, client_phone TEXT, client_mail TEXT)";
-        orderQuery = "CREATE TABLE IF NOT EXISTS orden (id_order TEXT PRIMARY KEY, product_id TEXT, client_id TEXT)";
+        orderQuery = "CREATE TABLE IF NOT EXISTS orden (id_order TEXT PRIMARY KEY , product_id TEXT, client_id TEXT, quantity TEXT)";
         productTypeQuery = "CREATE TABLE IF NOT EXISTS product_type (id_type TEXT PRIMARY KEY, type_name TEXT)";
 
         try {
@@ -41,21 +41,21 @@ public class DbPyB extends SQLiteOpenHelper{
             db.execSQL(clientQuery);
             db.execSQL(productTypeQuery);
             db.execSQL(orderQuery);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean insertUpdateProduct(Product product){
+    public boolean insertUpdateProduct(Product product) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT OR REPLACE INTO product VALUES('"+product.getId()+"','"+product.getName()+"','"+product.getDescription()+"','"+product.getPrice()+"','"+product.getProductType()+"')";
+        String query = "INSERT OR REPLACE INTO product VALUES('" + product.getId() + "','" + product.getName() + "','" + product.getDescription() + "','" + product.getPrice() + "','" + product.getProductType() + "')";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -64,16 +64,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean insertUpdateClient(Client client){
+    public boolean insertUpdateClient(Client client) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT OR REPLACE INTO client VALUES('"+client.getId()+"','"+client.getName()+"','"+client.getAddress()+"','"+client.getNumberPhone()+"','"+client.getMail()+"')";
+        String query = "INSERT OR REPLACE INTO client VALUES('" + client.getId() + "','" + client.getName() + "','" + client.getAddress() + "','" + client.getNumberPhone() + "','" + client.getMail() + "')";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -82,16 +82,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean insertUpdateOrder(Order order){
+    public boolean insertUpdateOrder(Order order) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT OR REPLACE INTO order VALUES('"+order.getId()+"','"+order.getProductId()+"','"+order.getClientId()+"')";
+        String query = "INSERT INTO orden VALUES( '"+order.getId()+"_"+order.getClientId()+"','" + order.getProductId() + "','" + order.getClientId() +"','" + order.getQuantity() + "')";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -100,16 +100,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean insertUpdateProductType(ProductType productType){
+    public boolean insertUpdateProductType(ProductType productType) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "INSERT OR REPLACE INTO product_type VALUES('"+productType.getId()+"','"+productType.getName()+"')";
+        String query = "INSERT OR REPLACE INTO product_type VALUES('" + productType.getId() + "','" + productType.getName() + "')";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -118,16 +118,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean deleteProduct(Product product){
+    public boolean deleteProduct(Product product) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM product WHERE id_product LIKE '"+product.getId()+"'";
+        String query = "DELETE FROM product WHERE id_product LIKE '" + product.getId() + "'";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -136,16 +136,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean deleteClient(Client client){
+    public boolean deleteClient(Client client) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM client WHERE id_client LIKE '"+client.getId()+"'";
+        String query = "DELETE FROM client WHERE id_client LIKE '" + client.getId() + "'";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -154,16 +154,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean deleteOrder(Order order){
+    public boolean deleteOrder(Order order) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM order WHERE id_order LIKE '"+order.getId()+"'";
+        String query = "DELETE FROM orden WHERE id_order LIKE '" + order.getId()+"'";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -172,16 +172,16 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public boolean deleteProductType(ProductType productType){
+    public boolean deleteOrderProductId(int productId, String clientId) {
         boolean flag = false;
         SQLiteDatabase db = getWritableDatabase();
-        String query = "DELETE FROM product_type WHERE id_type LIKE '"+productType.getId()+"'";
+        String query = "DELETE FROM orden WHERE product_id LIKE '" + productId + "' AND client_id LIKE '" + clientId + "'";
 
-        if (db != null){
+        if (db != null) {
             try {
                 db.execSQL(query);
                 flag = true;
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -190,18 +190,36 @@ public class DbPyB extends SQLiteOpenHelper{
         return flag;
     }
 
-    public ArrayList<Product> readProducts(int productId, int productType){
+    public boolean deleteProductType(ProductType productType) {
+        boolean flag = false;
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DELETE FROM product_type WHERE id_type LIKE '" + productType.getId() + "'";
+
+        if (db != null) {
+            try {
+                db.execSQL(query);
+                flag = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        db.close();
+
+        return flag;
+    }
+
+    public ArrayList<Product> readProducts(int productId, int productType) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<Product> products = null;
 
-        if (productId>0){
-            query = "SELECT * FROM product WHERE id_product LIKE '"+productId+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (productId > 0) {
+            query = "SELECT * FROM product WHERE id_product LIKE '" + productId + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     products = new ArrayList<>();
 
                     do {
@@ -214,16 +232,16 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         products.add(product);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
-        }else if (productType >0){
+        } else if (productType > 0) {
 
-            query = "SELECT * FROM product WHERE product_type LIKE '"+productType+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+            query = "SELECT * FROM product WHERE product_type LIKE '" + productType + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     products = new ArrayList<>();
 
                     do {
@@ -236,7 +254,7 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         products.add(product);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
         }
@@ -245,18 +263,18 @@ public class DbPyB extends SQLiteOpenHelper{
         return products;
     }
 
-    public ArrayList<Client> readClient(String clientId){
+    public ArrayList<Client> readClient(String clientId) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<Client> clients = null;
 
-        if (clientId != null && clientId.length() > 0){
-            query = "SELECT * FROM client WHERE id_client LIKE '"+clientId+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (clientId != null && clientId.length() > 0) {
+            query = "SELECT * FROM client WHERE id_client LIKE '" + clientId + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     clients = new ArrayList<>();
 
                     do {
@@ -270,7 +288,7 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         clients.add(client);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
         }
@@ -280,18 +298,18 @@ public class DbPyB extends SQLiteOpenHelper{
         return clients;
     }
 
-    public ArrayList<Client> readClientEmail(String email){
+    public ArrayList<Client> readClientEmail(String email) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<Client> clients = null;
 
-        if (email != null && email.length() > 0){
-            query = "SELECT * FROM client WHERE client_mail LIKE '"+email+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (email != null && email.length() > 0) {
+            query = "SELECT * FROM client WHERE client_mail LIKE '" + email + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     clients = new ArrayList<>();
 
                     do {
@@ -305,7 +323,7 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         clients.add(client);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
         }
@@ -315,53 +333,45 @@ public class DbPyB extends SQLiteOpenHelper{
         return clients;
     }
 
-    public ArrayList<Client> readClientLogin(String clientId, String pass){
+    public Client readClientLogin(String clientId, String pass) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
-        ArrayList<Client> clients = null;
+        Client client = null;
 
-        if (clientId != null && clientId.length() > 0){
-            query = "SELECT * FROM client WHERE id_client LIKE '"+clientId+"' AND client_name LIKE '"+pass+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (clientId != null && clientId.length() > 0) {
+            query = "SELECT * FROM client WHERE id_client LIKE '" + clientId + "' AND client_name LIKE '" + pass + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
-                    clients = new ArrayList<>();
-
-                    do {
-                        Client client = new Client();
-
-                        client.setId(cursor.getString(0));
-                        client.setName(cursor.getString(1));
-                        client.setAddress(cursor.getString(2));
-                        client.setNumberPhone(cursor.getString(3));
-                        client.setMail(cursor.getString(4));
-
-                        clients.add(client);
-
-                    }while ((cursor.moveToNext()));
+                if (cursor.moveToFirst()) {
+                    client = new Client();
+                    client.setId(cursor.getString(0));
+                    client.setName(cursor.getString(1));
+                    client.setAddress(cursor.getString(2));
+                    client.setNumberPhone(cursor.getString(3));
+                    client.setMail(cursor.getString(4));
                 }
             }
         }
 
         db.close();
 
-        return clients;
+        return client;
     }
 
-    public ArrayList<ProductType> readProductTypes(int productTypeId, boolean allProductTypes){
+    public ArrayList<ProductType> readProductTypes(int productTypeId, boolean allProductTypes) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<ProductType> productTypes = null;
 
-        if (productTypeId>0 && allProductTypes == false){
-            query = "SELECT * FROM product_type WHERE id_type LIKE '"+productTypeId+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (productTypeId > 0 && allProductTypes == false) {
+            query = "SELECT * FROM product_type WHERE id_type LIKE '" + productTypeId + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     productTypes = new ArrayList<>();
 
                     do {
@@ -372,15 +382,15 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         productTypes.add(productType);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
-        }else if (allProductTypes == true){
+        } else if (allProductTypes == true) {
             query = "SELECT * FROM product_type";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     productTypes = new ArrayList<>();
 
                     do {
@@ -391,7 +401,7 @@ public class DbPyB extends SQLiteOpenHelper{
 
                         productTypes.add(productType);
 
-                    }while ((cursor.moveToNext()));
+                    } while ((cursor.moveToNext()));
                 }
             }
         }
@@ -401,51 +411,56 @@ public class DbPyB extends SQLiteOpenHelper{
         return productTypes;
     }
 
-    public ArrayList<Order> readOrders(int orderId, int clientId){
+    public Order readOrder(int productID, String clientId) {
+
+        SQLiteDatabase db = getReadableDatabase();
+        String query;
+        Order order = null;
+
+        if (productID > 0) {
+            query = "SELECT * FROM orden WHERE id_order LIKE '" + productID + "_" + clientId+"'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
+
+                if (cursor.moveToFirst()) {
+                    order = new Order();
+                    order.setId(cursor.getString(0));
+                    order.setProductId(Integer.parseInt(cursor.getString(1)));
+                    order.setClientId(cursor.getString(2));
+                    order.setQuantity(Integer.parseInt(cursor.getString(3)));
+                }
+            }
+        }
+
+        db.close();
+
+        return order;
+    }
+
+    public ArrayList<Order> readAllOrdersByClientId(String clientId) {
 
         SQLiteDatabase db = getReadableDatabase();
         String query;
         ArrayList<Order> orders = null;
 
-        if (orderId>0){
-            query = "SELECT * FROM order WHERE id_order LIKE '"+orderId+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
+        if (clientId.length() > 0) {
+            //query = "SELECT * FROM orden";
+            query = "SELECT * FROM orden WHERE client_id LIKE '" + clientId + "'";
+            if (db != null) {
+                Cursor cursor = db.rawQuery(query, null);
 
-                if (cursor.moveToFirst()){
+                if (cursor.moveToFirst()) {
                     orders = new ArrayList<>();
-
                     do {
                         Order order = new Order();
-
-                        order.setId(Integer.parseInt(cursor.getString(0)));
+                        order.setId(cursor.getString(0));
                         order.setProductId(Integer.parseInt(cursor.getString(1)));
-                        order.setClientId(Integer.parseInt(cursor.getString(2)));
+                        order.setClientId(cursor.getString(2));
+                        order.setQuantity(Integer.parseInt(cursor.getString(3)));
 
                         orders.add(order);
-
-                    }while ((cursor.moveToNext()));
-                }
-            }
-        }else if (clientId >0){
-
-            query = "SELECT * FROM order WHERE client_id LIKE '"+clientId+"'";
-            if (db != null){
-                Cursor cursor = db.rawQuery(query,null);
-
-                if (cursor.moveToFirst()){
-                    orders = new ArrayList<>();
-
-                    do {
-                        Order order = new Order();
-
-                        order.setId(Integer.parseInt(cursor.getString(0)));
-                        order.setProductId(Integer.parseInt(cursor.getString(1)));
-                        order.setClientId(Integer.parseInt(cursor.getString(2)));
-
-                        orders.add(order);
-
-                    }while ((cursor.moveToNext()));
+                        order =null;
+                    }while (cursor.moveToNext());
                 }
             }
         }

@@ -5,15 +5,24 @@ package com.example.pyb.Beans;
  */
 public class Order {
 
-    private int id;
+    private String id;
     private int productId;
-    private int clientId;
+    private String clientId;
+    private int quantity;
 
-    public int getId() {
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -25,11 +34,11 @@ public class Order {
         this.productId = productId;
     }
 
-    public int getClientId() {
+    public String getClientId() {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 }

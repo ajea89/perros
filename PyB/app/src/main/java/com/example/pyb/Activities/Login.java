@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.pyb.Beans.Client;
 import com.example.pyb.DataBase.DbPyB;
 import com.example.pyb.R;
+import com.example.pyb.Utils.UserPreferences;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class Login extends Activity {
         final EditText etLoginPassword = (EditText) findViewById(R.id.et_login_password);
         Button  btLoginMissedPassword = (Button) findViewById(R.id.bt_login_missed_password);
         Button btLoginEnterAccount = (Button) findViewById(R.id.bt_login_enter_account);
+        Button btLoginRegister = (Button) findViewById(R.id.bt_login_register);
 
 
         btLoginEnterAccount.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +44,14 @@ public class Login extends Activity {
                 if(user.length() > 0 && password.length() > 0){
 
                     db = new DbPyB(Login.this);
-                    ArrayList<Client> clients = db.readClientLogin(user,password);
+                   Client cliente = db.readClientLogin(user,password);
 
-                    if (clients != null){
+                    if (cliente != null){
+
+                        UserPreferences up = new UserPreferences(Login.this);
+                        up.cleanPrefs();
+                        up.addPreferences(cliente);
+
                         Intent intent = new Intent(Login.this, NavigationDrawer.class);
                         startActivity(intent);
                     }else {
@@ -60,6 +67,14 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, LoginRecoverPassword.class);
+                startActivity(intent);
+            }
+        });
+
+        btLoginRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, LoginRegister.class);
                 startActivity(intent);
             }
         });

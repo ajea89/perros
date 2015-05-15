@@ -7,7 +7,6 @@
 
     <TextView
         android:id="@+id/tv_welcome"
-        android:text="¡Bienvenido! \n ''Prototipo de Perros y Burros''"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/accent_material_light"

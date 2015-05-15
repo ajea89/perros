@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pyb.Adapters.EventAdapter;
+import com.example.pyb.Beans.Client;
 import com.example.pyb.R;
 import com.example.pyb.Utils.Constans;
+import com.example.pyb.Utils.UserPreferences;
 import com.viewpagerindicator.CirclePageIndicator;
 
 
@@ -28,6 +30,8 @@ public class EventFragment extends BaseFragment {
         return eventFragment;
     }
 
+    private Client _user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.event_fragment_layout, container, false);
@@ -36,6 +40,9 @@ public class EventFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        UserPreferences userPreferences =new UserPreferences(getActivity());
+        _user = userPreferences.getPrefs();
 
         TextView welcome = (TextView) findViewById(R.id.tv_welcome);
         ViewPager pager = (ViewPager) findViewById(R.id.image_pager);
@@ -51,6 +58,7 @@ public class EventFragment extends BaseFragment {
             images[3] = R.drawable.evento4;
 
         }else if(getArguments().getInt(ARG1) == Constans.HOME_FRAGMENT){
+            welcome.setText("¡Bienvenido(a) "+_user.getId()+"! \n ''Prototipo de Perros y Burros''");
             welcome.setVisibility(View.VISIBLE);
             images = new int[2];
             images[0] = R.drawable.home1;

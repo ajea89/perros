@@ -1,9 +1,11 @@
 package com.example.pyb.Beans;
 
+import java.io.Serializable;
+
 /**
  * Created by alan on 10/04/15.
  */
-public class Client {
+public class Client implements Serializable{
 
     private String id;
     private String name;

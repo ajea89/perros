@@ -26,6 +26,7 @@ import com.example.pyb.Fragments.MenuFragment;
 import com.example.pyb.Fragments.PlacesFragment;
 import com.example.pyb.R;
 import com.example.pyb.Utils.Constans;
+import com.example.pyb.Utils.UserPreferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,13 +125,22 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
                     fragment = CarFragment.newInstance();
                     break;
                 case 7:
+                    UserPreferences up = new UserPreferences(NavigationDrawer.this);
+                    up.cleanPrefs();
                     finish();
                     break;
             }
         }
+
         if (fragment != null){
+
+            int countBackStack = getFragmentManager().getBackStackEntryCount();
+            for (int i = 0 ; i<countBackStack-1 ; i++){
+                getSupportFragmentManager().popBackStack();
+            }
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.content_frame, fragment).commit();
+            transaction.replace(R.id.content_frame, fragment, null).commit();
         }
         currentSection = section;
     }

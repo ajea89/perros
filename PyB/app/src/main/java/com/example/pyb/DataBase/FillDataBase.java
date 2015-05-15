@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.pyb.Beans.Client;
+import com.example.pyb.Beans.Order;
 import com.example.pyb.Beans.Product;
 import com.example.pyb.Beans.ProductType;
 

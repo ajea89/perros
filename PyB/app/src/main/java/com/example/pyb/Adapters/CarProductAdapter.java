@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pyb.Beans.Client;
 import com.example.pyb.Beans.Order;
@@ -21,14 +20,14 @@ import java.util.List;
 /**
  * Created by alan on 14/04/15.
  */
-public class MenuProductAdapter extends BaseAdapter {
+public class CarProductAdapter extends BaseAdapter {
 
     private Context context;
     private List<Product> products;
     private Client _user;
     private CatalogProductAdapterListener listener;
 
-    public MenuProductAdapter(Context context, List<Product> products) {
+    public CarProductAdapter(Context context, List<Product> products) {
         this.context = context;
         this.products = products;
 
@@ -53,23 +52,24 @@ public class MenuProductAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        ViewCarHolder holder;
 
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.menu_product_item_list, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.car_item_list, parent, false);
 
-            holder = new ViewHolder();
-            holder.tvProductName = (TextView) convertView.findViewById(R.id.tv_product_name);
-            holder.tvProductDescription = (TextView) convertView.findViewById(R.id.tv_product_description);
-            holder.tvProductPrice = (TextView) convertView.findViewById(R.id.tv_product_price);
-            holder.ivAddCar = (ImageView) convertView.findViewById(R.id.iv_add);
+            holder = new ViewCarHolder();
+            holder.tvProductName = (TextView) convertView.findViewById(R.id.tv_car_product_name);
+            holder.tvProductDescription = (TextView) convertView.findViewById(R.id.tv_car_product_description);
+            holder.tvProductPrice = (TextView) convertView.findViewById(R.id.tv_car_product_price);
+            holder.tvProductQuantity = (TextView) convertView.findViewById(R.id.tv_car_quantity);
+            holder.ivAddCar = (ImageView) convertView.findViewById(R.id.iv_car_add);
 
             convertView.setTag(holder);
         }else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewCarHolder) convertView.getTag();
         }
 
-        Product product = products.get(position);
+        final Product product = products.get(position);
 
         holder.tvProductName.setText(product.getName());
         if (product.getDescription().equals(null) || product.getDescription().equals("null"))
@@ -88,6 +88,7 @@ public class MenuProductAdapter extends BaseAdapter {
             holder.ivAddCar.setImageResource(R.mipmap.icon_car_off);
         }else {
             holder.ivAddCar.setImageResource(R.mipmap.icon_car_on);
+            holder.tvProductQuantity.setText(""+order.getQuantity());
         }
 
         holder.ivAddCar.setOnClickListener(new View.OnClickListener() {
@@ -110,10 +111,11 @@ public class MenuProductAdapter extends BaseAdapter {
         this.listener = listener;
     }
 
-    static class ViewHolder{
+    static class ViewCarHolder{
         TextView tvProductName;
         TextView tvProductDescription;
         TextView tvProductPrice;
+        TextView tvProductQuantity;
         ImageView ivAddCar;
     }
 
