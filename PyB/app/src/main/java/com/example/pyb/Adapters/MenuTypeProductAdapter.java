@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.pyb.Beans.ProductType;
@@ -62,7 +63,7 @@ public class MenuTypeProductAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             holder.tvProductTypeTitle = (TextView) convertView.findViewById(R.id.tv_product_type_title);
-            holder.lyMenuProductType = (LinearLayout) convertView.findViewById(R.id.ly_menu_product_type);
+            holder.lyMenuProductType = (RelativeLayout) convertView.findViewById(R.id.ly_menu_product_type);
 
             convertView.setTag(holder);
         }else {
@@ -79,6 +80,6 @@ public class MenuTypeProductAdapter extends BaseAdapter {
 
     static class ViewHolder{
         TextView tvProductTypeTitle;
-        LinearLayout lyMenuProductType;
+        RelativeLayout lyMenuProductType;
     }
 }

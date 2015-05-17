@@ -10,7 +10,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="No hay productos agregados."
-        android:textColor="@color/accent_material_light"
+        android:textColor="@android:color/holo_blue_dark"
         android:textSize="18sp"
         android:visibility="gone" />
 

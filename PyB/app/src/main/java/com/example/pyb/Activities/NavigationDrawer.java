@@ -39,6 +39,7 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle drawerToggle;
     ListView leftList;
+    String[] navTitles;
     int currentSection = -1;
 
     @Override
@@ -65,10 +66,10 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
 
         drawerLayout.setDrawerListener(drawerToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        //getSupportActionBar().setTitle("");
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-        String[] navTitles = getResources().getStringArray(R.array.nav_titles);
+        navTitles = getResources().getStringArray(R.array.nav_titles);
 
         //lista de items para menu
         List<NavigationDrawerItem> drawerItems = new ArrayList<NavigationDrawerItem>();
@@ -134,13 +135,14 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
 
         if (fragment != null){
 
-            int countBackStack = getFragmentManager().getBackStackEntryCount();
-            for (int i = 0 ; i<countBackStack-1 ; i++){
+            int countBackStack = getSupportFragmentManager().getBackStackEntryCount();
+            for (int i = 0 ; i<countBackStack ; i++){
                 getSupportFragmentManager().popBackStack();
             }
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.content_frame, fragment, null).commit();
+            getSupportActionBar().setTitle(navTitles[section]);
         }
         currentSection = section;
     }
