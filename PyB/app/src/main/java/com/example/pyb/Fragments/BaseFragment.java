@@ -19,14 +19,14 @@ public class BaseFragment extends Fragment {
 
     public void addFragmentToBackStack(Fragment fragment, String tag, int container){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        transaction.setCustomAnimations(R.anim.in_fragment, R.anim.out_fragment, R.anim.out_fragment, R.anim.in_fragment);
         transaction.addToBackStack(tag);
         transaction.replace(container, fragment, tag).commit();
     }
 
     public void addFragmentToBackStack(Fragment fragment, String tag){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        transaction.setCustomAnimations(R.anim.in_fragment, R.anim.out_fragment, R.anim.in_fragment, R.anim.out_fragment);
         transaction.addToBackStack(tag);
         transaction.replace(R.id.content_frame, fragment, tag).commit();
     }

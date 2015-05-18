@@ -37,12 +37,16 @@ public class GalleryFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        mViewPager.setAdapter(new GalleryPagerAdapter());
+        mViewPager = (HackyViewPager) view.findViewById(R.id.view_pager);
+        try {
+            mViewPager.setAdapter(new GalleryPagerAdapter());
+        }catch (Exception e){}
 
         if (savedInstanceState != null) {
-            boolean isLocked = savedInstanceState.getBoolean(ISLOCKED_ARG, false);
-            ((HackyViewPager) mViewPager).setLocked(isLocked);
+            try {
+                boolean isLocked = savedInstanceState.getBoolean(ISLOCKED_ARG, false);
+                ((HackyViewPager) mViewPager).setLocked(isLocked);
+            }catch (Exception e){}
         }
     }
 
@@ -55,7 +59,9 @@ public class GalleryFragment extends BaseFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (isViewPagerActive()) {
-            outState.putBoolean(ISLOCKED_ARG, ((HackyViewPager) mViewPager).isLocked());
+            try {
+                outState.putBoolean(ISLOCKED_ARG, ((HackyViewPager) mViewPager).isLocked());
+            }catch (Exception e){}
         }
         super.onSaveInstanceState(outState);
     }

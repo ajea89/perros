@@ -22,6 +22,7 @@ import com.example.pyb.Fragments.AboutUsFragment;
 import com.example.pyb.Fragments.CarFragment;
 import com.example.pyb.Fragments.EventFragment;
 import com.example.pyb.Fragments.GalleryFragment;
+import com.example.pyb.Fragments.GridGalleryFragment;
 import com.example.pyb.Fragments.MenuFragment;
 import com.example.pyb.Fragments.PlacesFragment;
 import com.example.pyb.R;
@@ -111,7 +112,7 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
                     fragment = AboutUsFragment.newInstance();
                     break;
                 case 2:
-                    fragment = GalleryFragment.newInstance();
+                    fragment = GridGalleryFragment.newInstance();
                     break;
                 case 3:
                     fragment = MenuFragment.newInstance();
@@ -141,6 +142,7 @@ public class NavigationDrawer extends ActionBarActivity implements android.suppo
             }
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.in_fragment, R.anim.out_fragment, R.anim.in_fragment, R.anim.out_fragment);
             transaction.replace(R.id.content_frame, fragment, null).commit();
             getSupportActionBar().setTitle(navTitles[section]);
         }
